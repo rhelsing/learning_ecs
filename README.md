@@ -4,9 +4,13 @@ This assumes you have aws set up, configured a sub user, have aws cli access.
 
 1. Install CLI
 
+```bash
 sudo curl -o /usr/local/bin/ecs-cli https://s3.amazonaws.com/amazon-ecs-cli/ecs-cli-darwin-amd64-latest
+
 sudo chmod +x /usr/local/bin/ecs-cli
+
 ecs-cli --version
+```
 
 
 2. edit ~/.ecs/config
@@ -28,17 +32,30 @@ cfn-stack-name-prefix       = amazon-ecs-cli-setup-
 3. Tutorial (used docker-compose.yml by default)
 
 ###spawn cluster (will take a good bit)
+```bash
 ecs-cli up --keypair aws --capability-iam --size 2 --instance-type t2.medium
+```
 
 ###test as a task
+```bash
 ecs-cli compose up
+
 ecs-cli compose down
+```
+
 
 ###run as a service (production)
+```bash
 ecs-cli compose service up
-ecs-cli ps `Go to site url`
+
+ecs-cli ps #ip address
+
 ecs-cli compose scale 2
+```
 
 ####clean up
+```bash
 ecs-cli compose service rm
+
 ecs-cli down --force
+```
